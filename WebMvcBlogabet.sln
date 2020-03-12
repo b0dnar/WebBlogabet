@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMvcBlogabet", "WebMvcBlogabet\WebMvcBlogabet.csproj", "{7115D394-83E2-4C32-9BBD-EF43A0C8685F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7115D394-83E2-4C32-9BBD-EF43A0C8685F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7115D394-83E2-4C32-9BBD-EF43A0C8685F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7115D394-83E2-4C32-9BBD-EF43A0C8685F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7115D394-83E2-4C32-9BBD-EF43A0C8685F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B7386F7-7BC4-4DA6-9116-1636244A042D}
+	EndGlobalSection
+EndGlobal

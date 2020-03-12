@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="filter">
+    <h2 class="align-center" align="center">Фильтр</h2>
+    <form method="post">
+        <label for="name">Процент</label>
+        <input type="number" name="percent" id="percent" onkeyup='saveValue(this);' />
+        <label for="age">Количество прогнозов</label>
+        <input type="number" name="countBet" id="countBet" onkeyup='saveValue(this);' />
+        <input type="submit" value="Применить" id="button_filter" />
+        <input type="submit" value="Сбросить" id="button_no_filter" />
+    </form>
+    <br />
+    <form >
+        <label for="name">Процент</label>
+        <input type="number" name="percent" id="percentColor" onkeyup='saveValue(this);' />
+        <label for="age">Количество прогнозов</label>
+        <input type="number" name="countBet" id="countBetColor" onkeyup='saveValue(this);' />
+        <input type="submit" value="Применить" id="button_filter_color" />
+        <input type="submit" value="Сбросить" id="button_no_filter_color" />
+    </form>
+</div>
+<br />
+@*//<h3 id="changeText">Фильтр не включен</h3>*@
+<br/>
+<h2 class="align-center" align="center">Прогнозы</h2>
+<div id="forecastId" />
+<script src="~/js/jquery-1.10.2.js"></script>
+<script src="~/js/index.js"></script>
