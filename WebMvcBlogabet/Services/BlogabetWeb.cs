@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using HtmlAgilityPack;
+using Serilog;
 
 namespace WebMvcBlogabet.Services
 {
@@ -58,6 +59,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
+                Log.Error(e, nameof(Login));
                 return false;
             }
         }
@@ -88,6 +90,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
+                Log.Error(e, nameof(UpdatePage));
                 throw;
             }
         }
@@ -114,6 +117,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
+                Log.Error(e, nameof(SeeOld));
                 throw;
             }
         }

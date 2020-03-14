@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebMvcBlogabet.Services;
+using Serilog;
 
 namespace WebMvcBlogabet
 {

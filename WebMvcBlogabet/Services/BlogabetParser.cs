@@ -8,6 +8,7 @@ using HtmlAgilityPack;
 using WebMvcBlogabet.DataStorage;
 using WebMvcBlogabet.Models;
 using System.Linq;
+using Serilog;
 
 namespace WebMvcBlogabet.Services
 {
@@ -81,6 +82,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
+                Log.Error(e, nameof(Run));
                 currentErr++;
                 if (countError < currentErr)
                 {
@@ -144,18 +146,22 @@ namespace WebMvcBlogabet.Services
                         }
                         else
                         {
-                            data.TimeEndBet = DateTime.Now.AddHours(5);
+                            data.TimeEndBet = DateTime.Now.AddDays(1);
                         }
 
                         forecastData.Add(data);
                     }
-                    catch { }
+                    catch(Exception e)
+                    {
+                        Log.Warning(e, nameof(ParsePage));
+                    }
                 }
 
                 return forecastData;
             }
             catch (Exception e)
             {
+                Log.Error(e, nameof(ParsePage));
                 throw;
             }
         }
