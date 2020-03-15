@@ -7,8 +7,6 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Serilog;
-using WebMvcBlogabet.Configurations;
 
 
 namespace WebMvcBlogabet
@@ -17,7 +15,6 @@ namespace WebMvcBlogabet
     {
         public static void Main(string[] args)
         {
-            SerilogConfig.Configure("MegaBotPositive");
             BuildWebHost(args).Run();
         }
 

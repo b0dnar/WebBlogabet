@@ -1,0 +1,5 @@
+2020-03-15T20:59:39.2737518+02:00 0HLU92C1IT8M3:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:51629/   (ca22a1cb)
+2020-03-15T20:59:39.7912084+02:00 0HLU92C1IT8M3:00000001 [INF] Executing action method "WebMvcBlogabet.Controllers.HomeController.Index (WebMvcBlogabet)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2020-03-15T20:59:43.2517631+02:00 0HLU92C1IT8M3:00000001 [INF] Executing ViewResult, running view at path "/Views/Home/Index.cshtml". (9707eebe)
+2020-03-15T20:59:43.6500688+02:00 0HLU92C1IT8M3:00000001 [INF] Executed action "WebMvcBlogabet.Controllers.HomeController.Index (WebMvcBlogabet)" in 3958.9136ms (afa2e885)
+2020-03-15T20:59:43.6683836+02:00 0HLU92C1IT8M3:00000001 [INF] Request finished in 4444.1858ms 200 text/html; charset=utf-8 (791a596a)

@@ -6,7 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using HtmlAgilityPack;
-using Serilog;
+using Microsoft.Extensions.Logging;
+using WebMvcBlogabet.Logging;
 
 namespace WebMvcBlogabet.Services
 {
@@ -14,6 +15,7 @@ namespace WebMvcBlogabet.Services
     {
         private HttpClient _client;
         private readonly string _urlSite = "https://blogabet.com";
+        private readonly ILogger _logger = Log.CreateLogger<BlogabetWeb>();
 
         public BlogabetWeb()
         {
@@ -59,7 +61,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
-                Log.Error(e, nameof(Login));
+                _logger.LogError(e, nameof(Login));
                 return false;
             }
         }
@@ -90,7 +92,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
-                Log.Error(e, nameof(UpdatePage));
+                _logger.LogError(e, nameof(UpdatePage));
                 throw;
             }
         }
@@ -117,7 +119,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
-                Log.Error(e, nameof(SeeOld));
+                _logger.LogError(e, nameof(SeeOld));
                 throw;
             }
         }

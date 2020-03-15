@@ -8,7 +8,8 @@ using HtmlAgilityPack;
 using WebMvcBlogabet.DataStorage;
 using WebMvcBlogabet.Models;
 using System.Linq;
-using Serilog;
+using Microsoft.Extensions.Logging;
+using WebMvcBlogabet.Logging;
 
 namespace WebMvcBlogabet.Services
 {
@@ -18,6 +19,7 @@ namespace WebMvcBlogabet.Services
         private readonly int _countSeeOld = 10;
         private CancellationToken cancellationToken;
         private BlogabetWeb _web;
+        private readonly ILogger _logger = Log.CreateLogger<BlogabetParser>();
 
         public BlogabetParser(CancellationToken token)
         {
@@ -82,7 +84,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
-                Log.Error(e, nameof(Run));
+                _logger.LogError(e, nameof(Run));
                 currentErr++;
                 if (countError < currentErr)
                 {
@@ -128,11 +130,13 @@ namespace WebMvcBlogabet.Services
                     try
                     {
                         var info = item.SelectSingleNode(".//span[@class='u-dp data-info']").InnerText.TrimStart().TrimEnd().Split('%');
+
                         Int32.TryParse(info[0].Replace("-", "").Replace("+", ""), out var percent);
                         Int32.TryParse(info[1].Replace("(", "").Replace(")", ""), out var countBet);
 
                         data.NameBetter = item.SelectSingleNode(".//div[@class='title-name']/div/a").InnerText.TrimStart().TrimEnd();
-                        data.NameBet = item.SelectSingleNode(".//div[@class='pick-line']").InnerText.TrimStart().TrimEnd();
+                        var nameBet = item.SelectSingleNode(".//div[@class='pick-line']");
+                        data.NameBet = nameBet == null ? "empty" : nameBet.InnerText.TrimStart().TrimEnd();
                         data.Percent = info[0].Contains("-") ? 0 - percent : percent;
                         data.CountBet = countBet;
                         data.HtmlPayload = item.SelectSingleNode(".//div[@class='feed-pick-title']").InnerHtml.TrimStart().TrimEnd();
@@ -141,8 +145,16 @@ namespace WebMvcBlogabet.Services
 
                         if (!item.InnerText.Contains("Show details"))
                         {
-                            var timeStartMatch = item.SelectSingleNode(".//small[@class='text-muted']").InnerText.Split('\n').Where(x=>x.Contains("Kick off")).First().TrimStart().TrimEnd().Replace("Kick off: ","");
-                            data.TimeEndBet = DateTime.Parse(timeStartMatch).AddHours(2);
+                            var time = item.SelectSingleNode(".//small[@class='text-muted']");
+                            if(time == null)
+                            {
+                                data.TimeEndBet = DateTime.Now.AddDays(1);
+                            }
+                            else
+                            {
+                                var timeStartMatch = time.InnerText.Split('\n').Where(x => x.Contains("Kick off")).First().TrimStart().TrimEnd().Replace("Kick off: ", "");
+                                data.TimeEndBet = DateTime.Parse(timeStartMatch).AddHours(2);
+                            }
                         }
                         else
                         {
@@ -153,7 +165,7 @@ namespace WebMvcBlogabet.Services
                     }
                     catch(Exception e)
                     {
-                        Log.Warning(e, nameof(ParsePage));
+                        _logger.LogWarning(e, nameof(ParsePage));
                     }
                 }
 
@@ -161,7 +173,7 @@ namespace WebMvcBlogabet.Services
             }
             catch (Exception e)
             {
-                Log.Error(e, nameof(ParsePage));
+                _logger.LogError(e, nameof(ParsePage));
                 throw;
             }
         }
